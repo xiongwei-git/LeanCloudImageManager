@@ -1,2 +1,2 @@
 # LeanCloudImageManager
-LeanCloudImageManager
+通过Python快速管理我在LearnCloud存放的图片
