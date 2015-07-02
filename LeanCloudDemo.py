@@ -115,13 +115,20 @@ if __name__ == '__main__':
 #     print(str(num)+" image url is null~~~~~~~~~~~~")
 # file.close()
 
-for num in range(1,2):
+for num in range(521,522):
   imageurl = queryOneDataByPosition(num)
   print("get url = "+ imageurl)
-  fileName = gGetFileName(imageurl)
-  checkFile = savePath+fileName
-  if os.path.exists(checkFile):
-        message = 'OK, the  file "%s" exists.'
-  else:
-        message = 'Sorry, I cannot find the "%s" file.'
-  print message % fileName
+  # fileName = gGetFileName(imageurl)
+  # checkFile = savePath+fileName
+  # if os.path.exists(checkFile):
+  #       message = 'OK, the  file "%s" exists.'
+  # else:
+  #       message = 'Sorry, I cannot find the "%s" file.'
+  # print message % fileName
+
+# query = Query(allPictures)
+# query.equal_to('position', 521)
+# pictures = query.find()
+# picture521 =  pictures[0]
+# picture521.set('image_src', 'https://ununsplash.imgix.net/reserve/jiyO1PKSunXa5z1SVGBg_photo01_1.jpg')
+# picture521.save()
