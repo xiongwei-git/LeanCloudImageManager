@@ -15,6 +15,7 @@ from leancloud import Query
 className = 'AllPictures'
 saveClassName = 'PythonTestData'
 allPictures = Object.extend(className)
+new10Picture = Object.extend('NewPictures')
 savePath = 'D://image//1-499//photo'
 allPictureUrlFile = '1-499.txt'
 errorPictureUrlFile = '1_499_error.txt'
@@ -178,21 +179,47 @@ if __name__ == '__main__':
       **	 Created on  2015-06-25	  **
       **	   @author: Ted		   **
       *************************************''')
+  '''
+  更新最新的10条
+  '''
+  query = Query(allPictures)
+  query.limit(10)
+  query.descending("updatedAt")
+  pictures = query.find()
+  print pictures[0].get('image_src')
+
+  oldQuery = Query(new10Picture)
+  oldQuery.descending("updatedAt")
+  oldPictures = oldQuery.find()
+  print str(len(oldPictures))
+
+  for num in range(0,10):
+      oldPicture = oldPictures[num]
+      newPicture = pictures[num]
+      oldPicture.set('image_src', newPicture.get('image_src'))
+      oldPicture.set('category', newPicture.get('category'))
+      oldPicture.set('color', newPicture.get('color'))
+      oldPicture.set('width', newPicture.get('width'))
+      oldPicture.set('height', newPicture.get('height'))
+      oldPicture.set('author', newPicture.get('author'))
+      oldPicture.set('ratio', newPicture.get('ratio'))
+      oldPicture.set('position', newPicture.get('position'))
+      oldPicture.save()
+
 
   '''
   修改文件名称
   '''
-  query = Query(allPictures)
-  for num in range(1,500):
-      query.equal_to('position', num)
-      pictures = query.find()
-      if len(pictures) > 0:
-        pictureSelect = pictures[0]
-        imageurl = pictureSelect.get('image_src')
-        if imageurl.find('00'+str(num)) > 0:
-          print ''
-        else:
-            print imageurl
+  # query = Query(allPictures)
+  # for num in range(1,500):
+  #     query.equal_to('position', num)
+  #     pictures = query.find()
+  #     if len(pictures) > 0:
+  #       pictureSelect = pictures[0]
+  #       imageurl = pictureSelect.get('image_src')
+  #       if imageurl.find('00'+str(num)) < 0:
+  #         print imageurl + '@' + str(num)
+            
         # oldName = gGetFileName(imageurl)
         # newFileName = getNewNameByPosition(num,oldName)
         # newFileUrl = getPreName(imageurl) + newFileName
